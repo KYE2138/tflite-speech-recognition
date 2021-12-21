@@ -113,7 +113,7 @@ def sd_callback(rec, frames, time, status):
     
     perdict_index = np.argmax(val)
     print ('perdict index:',perdict_index)
-    train_commands=['yes' 'no' 'on' 'off' 'slience' 'unknown']
+    train_commands=['yes', 'no', 'on', 'off', 'slience', 'unknown']
     print ('dectect voice:',train_commands[perdict_index])
     print('----------------------------------------------------------------------------')
 # Start streaming from microphone
