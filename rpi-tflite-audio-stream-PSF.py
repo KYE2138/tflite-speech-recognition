@@ -110,7 +110,7 @@ def sd_callback(rec, frames, time, status):
     
     if debug_time:
         print(timeit.default_timer() - start)
-
+    print('----------------------------------------------------------------------------')
 # Start streaming from microphone
 with sd.InputStream(channels=num_channels,
                     samplerate=sample_rate,
