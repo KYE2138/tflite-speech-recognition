@@ -15,7 +15,7 @@ from tflite_runtime.interpreter import Interpreter
 
 # Parameters
 debug_time = 1
-debug_acc = 0
+debug_acc = 1
 led_pin = 8
 word_threshold = 0.5
 rec_duration = 0.5
@@ -141,10 +141,10 @@ def sd_callback(rec, frames, time, status):
     interpreter.set_tensor(input_details[0]['index'], in_tensor)
     interpreter.invoke()
     output_data = interpreter.get_tensor(output_details[0]['index'])
-    val = output_data[0][0]
-    if val > word_threshold:
-        print('stop')
-        GPIO.output(led_pin, GPIO.HIGH)
+    val = output_data[0]
+    #if val > word_threshold:
+    #    print('stop')
+    #    GPIO.output(led_pin, GPIO.HIGH)
 
     if debug_acc:
         print(val)
