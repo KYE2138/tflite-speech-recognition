@@ -14,7 +14,7 @@ from tflite_runtime.interpreter import Interpreter
 
 # Parameters
 debug_time = 1
-debug_acc = 0
+debug_acc = 1
 led_pin = 8
 word_threshold = 0.5
 rec_duration = 0.5
@@ -23,7 +23,7 @@ sample_rate = 48000
 resample_rate = 8000
 num_channels = 1
 num_mfcc = 16
-model_path = 'wake_word_stop_lite.tflite'
+model_path = 'SpeechRecognition_PSF.tflite'
 
 # Sliding window
 window = np.zeros(int(rec_duration * resample_rate) * 2)
@@ -100,10 +100,10 @@ def sd_callback(rec, frames, time, status):
     interpreter.set_tensor(input_details[0]['index'], in_tensor)
     interpreter.invoke()
     output_data = interpreter.get_tensor(output_details[0]['index'])
-    val = output_data[0][0]
-    if val > word_threshold:
-        print('stop')
-        GPIO.output(led_pin, GPIO.HIGH)
+    val = output_data[0]
+    #if val > word_threshold:
+    #    print('stop')
+    #    GPIO.output(led_pin, GPIO.HIGH)
 
     if debug_acc:
         print(val)
