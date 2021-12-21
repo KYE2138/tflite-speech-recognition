@@ -24,7 +24,7 @@ sample_rate = 48000
 resample_rate = 8000
 num_channels = 1
 num_mfcc = 16
-model_path = 'wake_word_stop_lite.tflite'
+model_path = 'SpeechRecognition_TF_lite.tflite'
 
 # Sliding window
 window = np.zeros(int(rec_duration * resample_rate) * 2)
