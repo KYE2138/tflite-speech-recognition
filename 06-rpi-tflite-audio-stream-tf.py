@@ -134,7 +134,7 @@ def sd_callback(rec, frames, time, status):
 
     # Compute features
     mfccs = get_mfcc(window)
-    
+    mfccs = mfccs.numpy()
 
     # Make prediction from model
     in_tensor = np.float32(mfccs.reshape(1, mfccs.shape[0], mfccs.shape[1], 1))
