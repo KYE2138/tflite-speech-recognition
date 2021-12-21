@@ -107,9 +107,14 @@ def sd_callback(rec, frames, time, status):
 
     if debug_acc:
         print(val)
-    
+        
     if debug_time:
         print(timeit.default_timer() - start)
+    
+    perdict_index = np.argmax(val)
+    print ('perdict index:',perdict_index)
+    train_commands=['yes' 'no' 'on' 'off' 'slience' 'unknown']
+    print ('dectect voice:',train_commands[perdict_index])
     print('----------------------------------------------------------------------------')
 # Start streaming from microphone
 with sd.InputStream(channels=num_channels,
