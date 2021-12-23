@@ -23,7 +23,7 @@ sample_rate = 48000
 resample_rate = 8000
 num_channels = 1
 num_mfcc = 16
-model_path = 'SpeechRecognition_PSF.tflite'
+model_path = 'SpeechCommandRecognition_model.tflite'
 
 # Sliding window
 window = np.zeros(int(rec_duration * resample_rate) * 2)
@@ -113,7 +113,7 @@ def sd_callback(rec, frames, time, status):
     
     perdict_index = np.argmax(val)
     print ('perdict index:',perdict_index)
-    train_commands = ['one','two','three','four','five','six','seven','eight','nine','slience','unknown']
+    train_commands = ['yes','no','on','off','unknown','slience']
     print ('dectect voice:',train_commands[perdict_index])
     print('----------------------------------------------------------------------------')
 # Start streaming from microphone
