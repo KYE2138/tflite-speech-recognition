@@ -10,6 +10,8 @@ import timeit
 import python_speech_features
 import RPi.GPIO as GPIO
 
+import librosa
+
 from tflite_runtime.interpreter import Interpreter
 
 # Parameters
