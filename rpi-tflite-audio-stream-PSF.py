@@ -84,7 +84,17 @@ def sd_callback(rec, frames, time, status):
     window[len(window)//2:] = rec
 
     # Compute features
-    mfccs = np.abs(librosa.stft(equal_length,512))
+    mfccs = python_speech_features.base.mfcc(window, 
+                                        samplerate=new_fs,
+                                        winlen=0.256,
+                                        winstep=0.050,
+                                        numcep=num_mfcc,
+                                        nfilt=26,
+                                        nfft=4096,
+                                        preemph=0.0,
+                                        ceplifter=0,
+                                        appendEnergy=False,
+                                        winfunc=np.hanning)
     mfccs = mfccs.transpose()
 
     # Make prediction from model
