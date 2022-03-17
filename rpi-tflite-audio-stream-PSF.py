@@ -109,9 +109,9 @@ def sd_callback(rec, frames, time, status):
     interpreter.set_tensor(input_details[0]['index'], in_tensor)
     interpreter.invoke()
     output_data = interpreter.get_tensor(output_details[0]['index'])
-    val = output_data[0]
+    val = output_data[0][0]
 
-    
+    '''
     train_commands = ['house','slience']
     if debug_acc:
         print(train_commands)
@@ -123,13 +123,13 @@ def sd_callback(rec, frames, time, status):
     perdict_index = np.argmax(val)
     print ('perdict index:',perdict_index)
     print ('dectect voice:',train_commands[perdict_index])
-    
+    '''
     # global parameters
     global dc
     global LED_PIN
     global Led_status
     
-    if val[0] > word_threshold:
+    if val > word_threshold:
         print('I heard someone call me!')
         if Led_status == 0:
             GPIO.output(LED_PIN, GPIO.HIGH)
