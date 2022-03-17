@@ -137,10 +137,12 @@ def sd_callback(rec, frames, time, status):
     
     if val > word_threshold:
         print('I heard someone call me!')
-        if Led_status==0:
-           GPIO.output(LED_PIN, GPIO.HIGH)
+        if Led_status == 0:
+            GPIO.output(LED_PIN, GPIO.HIGH)
+            Led_status == 1
         else:
             GPIO.output(LED_PIN, GPIO.Low)
+            Led_status == 0
     print('----------------------------------------------------------------------------')
 
 # Start streaming from microphone
