@@ -135,7 +135,7 @@ def sd_callback(rec, frames, time, status):
     global LED_PIN
     global Led_status
     
-    if val > word_threshold:
+    if val[0] > word_threshold:
         print('I heard someone call me!')
         if Led_status == 0:
             GPIO.output(LED_PIN, GPIO.HIGH)
