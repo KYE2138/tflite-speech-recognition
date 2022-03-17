@@ -33,6 +33,21 @@ window = np.zeros(int(rec_duration * resample_rate) * 2)
 #GPIO.setmode(GPIO.BOARD)
 #GPIO.setup(8, GPIO.OUT, initial=GPIO.LOW)
 
+# GPIO parameters
+LED_PIN = 16
+FAN_PIN = 18
+GPIO.setmode(GPIO.BOARD)
+GPIO.setwarnings(False)
+# Led
+GPIO.setup(LED_PIN, GPIO.OUT)
+GPIO.output(LED_PIN, GPIO.LOW)
+Led_status = 0
+# Fan
+GPIO.setup(FAN_PIN, GPIO.OUT)
+p = GPIO.PWM(FAN_PIN, 25000)
+p.start(0)
+dc = 0
+
 # Load model (interpreter)
 interpreter = Interpreter(model_path)
 interpreter.allocate_tensors()
@@ -115,10 +130,17 @@ def sd_callback(rec, frames, time, status):
     print ('perdict index:',perdict_index)
     print ('dectect voice:',train_commands[perdict_index])
     
+    # global parameters
+    global dc
+    global LED_PIN
+    global Led_status
     
     if val > word_threshold:
         print('house!!!')
-        #GPIO.output(led_pin, GPIO.HIGH)
+        if Led_status==0:
+           GPIO.output(LED_PIN, GPIO.HIGH)
+        else:
+            GPIO.output(LED_PIN, GPIO.Low)
     print('----------------------------------------------------------------------------')
 
 # Start streaming from microphone
