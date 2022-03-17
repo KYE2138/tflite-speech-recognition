@@ -20,7 +20,7 @@ word_threshold = 0.5
 rec_duration = 0.5
 window_stride = 0.5
 sample_rate = 48000
-resample_rate = 8000
+resample_rate = 16000
 num_channels = 1
 num_mfcc = 16
 model_path = 'SpeechCommandRecognition_model.tflite'
@@ -101,21 +101,26 @@ def sd_callback(rec, frames, time, status):
     interpreter.invoke()
     output_data = interpreter.get_tensor(output_details[0]['index'])
     val = output_data[0]
-    #if val > word_threshold:
-    #    print('stop')
-    #    GPIO.output(led_pin, GPIO.HIGH)
 
+    
+    train_commands = ['house','slience']
     if debug_acc:
+        print(train_commands)
         print(val)
         
     if debug_time:
-        print(timeit.default_timer() - start)
+        print('Latency:', round(timeit.default_timer() - start , 4) ,' ms')
     
     perdict_index = np.argmax(val)
     print ('perdict index:',perdict_index)
-    train_commands = ['on','off','unknown','slience']
     print ('dectect voice:',train_commands[perdict_index])
+    
+    
+    if val > word_threshold:
+        print('house!!!')
+        #GPIO.output(led_pin, GPIO.HIGH)
     print('----------------------------------------------------------------------------')
+
 # Start streaming from microphone
 with sd.InputStream(channels=num_channels,
                     samplerate=sample_rate,
