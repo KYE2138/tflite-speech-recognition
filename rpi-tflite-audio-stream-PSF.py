@@ -29,9 +29,9 @@ model_path = 'SpeechCommandRecognition_model.tflite'
 window = np.zeros(int(rec_duration * resample_rate) * 2)
 
 # GPIO 
-GPIO.setwarnings(False)
-GPIO.setmode(GPIO.BOARD)
-GPIO.setup(8, GPIO.OUT, initial=GPIO.LOW)
+#GPIO.setwarnings(False)
+#GPIO.setmode(GPIO.BOARD)
+#GPIO.setup(8, GPIO.OUT, initial=GPIO.LOW)
 
 # Load model (interpreter)
 interpreter = Interpreter(model_path)
