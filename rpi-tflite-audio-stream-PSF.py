@@ -114,7 +114,7 @@ def sd_callback(rec, frames, time, status):
     #print (output_data[0][0])
     
     
-    #train_commands = ['stop']
+    train_commands = ['stop']
     if debug_acc:
         print('train_commands:',train_commands)
         print('Confidence:',val)
