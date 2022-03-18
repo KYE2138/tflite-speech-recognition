@@ -110,14 +110,14 @@ def sd_callback(rec, frames, time, status):
     interpreter.invoke()
     output_data = interpreter.get_tensor(output_details[0]['index'])
     val = output_data[0][0]
-    print(output_data[0])
-    print (output_data[0][0])
+    #print(output_data[0])
+    #print (output_data[0][0])
     
-    '''
-    train_commands = ['house','slience']
+    
+    #train_commands = ['house','slience']
     if debug_acc:
-        print(train_commands)
-        print(val)
+        #print(train_commands)
+        print('Confidence:',val)
         
     if debug_time:
         print('Latency:', round(timeit.default_timer() - start , 4) ,' ms')
