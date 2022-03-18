@@ -97,7 +97,7 @@ def sd_callback(rec, frames, time, status):
                                         winstep=0.050,
                                         numcep=num_mfcc,
                                         nfilt=26,
-                                        nfft=4096,
+                                        nfft=2048,
                                         preemph=0.0,
                                         ceplifter=0,
                                         appendEnergy=False,
