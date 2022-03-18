@@ -114,17 +114,19 @@ def sd_callback(rec, frames, time, status):
     #print (output_data[0][0])
     
     
-    #train_commands = ['house','slience']
+    #train_commands = ['stop']
     if debug_acc:
-        #print(train_commands)
+        print('train_commands:',train_commands)
         print('Confidence:',val)
         
     if debug_time:
         print('Latency:', round(timeit.default_timer() - start , 4) ,' ms')
     
+    '''
     perdict_index = np.argmax(val)
     print ('perdict index:',perdict_index)
     print ('dectect voice:',train_commands[perdict_index])
+    '''
     
     # global parameters
     global dc
@@ -132,7 +134,7 @@ def sd_callback(rec, frames, time, status):
     global Led_status
     
     if val > word_threshold:
-        print('I heard someone call me!')
+        print('I heard someone say the wake word!')
         if Led_status == 0:
             GPIO.output(LED_PIN, GPIO.HIGH)
             Led_status == 1
