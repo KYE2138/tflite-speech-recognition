@@ -37,7 +37,7 @@ GPIO.setwarnings(False)
 # Led
 GPIO.setup(LED_PIN, GPIO.OUT)
 GPIO.output(LED_PIN, GPIO.HIGH)
-Led_status = 0
+Led_status = 1
 # Fan
 GPIO.setup(FAN_PIN, GPIO.OUT)
 p = GPIO.PWM(FAN_PIN, 25000)
