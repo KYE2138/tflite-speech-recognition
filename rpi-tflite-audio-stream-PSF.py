@@ -125,7 +125,7 @@ def sd_callback(rec, frames, time, status):
     perdict_index = np.argmax(val)
     print ('perdict index:',perdict_index)
     print ('dectect voice:',train_commands[perdict_index])
-    '''
+    
     # global parameters
     global dc
     global LED_PIN
