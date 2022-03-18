@@ -137,10 +137,10 @@ def sd_callback(rec, frames, time, status):
         print('I heard someone say the wake word!')
         if Led_status == 0:
             GPIO.output(LED_PIN, GPIO.HIGH)
-            Led_status == 1
+            Led_status = 1
         elif Led_status == 1:
             GPIO.output(LED_PIN, GPIO.Low)
-            Led_status == 0
+            Led_status = 0
     print('----------------------------------------------------------------------------')
 
 # Start streaming from microphone
