@@ -132,15 +132,19 @@ def sd_callback(rec, frames, time, status):
     global dc
     global LED_PIN
     global Led_status
+    global FAN_PIN
     
     if val > word_threshold:
         print('I heard someone say the wake word!')
-        if Led_status == 0:
-            GPIO.output(LED_PIN, GPIO.HIGH)
-            Led_status = 1
-        elif Led_status == 1:
-            GPIO.output(LED_PIN, GPIO.LOW)
-            Led_status = 0
+        if dc == 0:
+            dc = 50
+            p.ChangeDutyCycle(dc)
+        elif Led_status == 50:
+            dc = 100
+            p.ChangeDutyCycle(dc)
+        elif Led_status == 100:
+            dc = 0
+            p.ChangeDutyCycle(dc)            
     print('----------------------------------------------------------------------------')
 
 # Start streaming from microphone
