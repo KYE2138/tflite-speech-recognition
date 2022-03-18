@@ -139,7 +139,7 @@ def sd_callback(rec, frames, time, status):
             GPIO.output(LED_PIN, GPIO.HIGH)
             Led_status = 1
         elif Led_status == 1:
-            GPIO.output(LED_PIN, GPIO.Low)
+            GPIO.output(LED_PIN, GPIO.LOW)
             Led_status = 0
     print('----------------------------------------------------------------------------')
 
