@@ -22,7 +22,7 @@ sample_rate = 48000
 resample_rate = 8000
 num_channels = 1
 num_mfcc = 16
-model_path = 'wake_word_house_lite.tflite'
+model_path = 'wake_word_stop_lite.tflite'
 
 # Sliding window
 window = np.zeros(int(rec_duration * resample_rate) * 2)
@@ -97,7 +97,7 @@ def sd_callback(rec, frames, time, status):
                                         winstep=0.050,
                                         numcep=num_mfcc,
                                         nfilt=26,
-                                        nfft=4096,
+                                        nfft=2048,
                                         preemph=0.0,
                                         ceplifter=0,
                                         appendEnergy=False,
@@ -110,35 +110,39 @@ def sd_callback(rec, frames, time, status):
     interpreter.invoke()
     output_data = interpreter.get_tensor(output_details[0]['index'])
     val = output_data[0][0]
-    print(output_data[0])
-    print (output_data[0][0])
+    #print(output_data[0])
+    #print (output_data[0][0])
     
-    '''
-    train_commands = ['house','slience']
+    
+    train_commands = ['stop']
     if debug_acc:
-        print(train_commands)
-        print(val)
+        print('train_commands:',train_commands)
+        print('Confidence:',val)
         
     if debug_time:
         print('Latency:', round(timeit.default_timer() - start , 4) ,' ms')
     
+    '''
     perdict_index = np.argmax(val)
     print ('perdict index:',perdict_index)
     print ('dectect voice:',train_commands[perdict_index])
     '''
+    
     # global parameters
     global dc
     global LED_PIN
     global Led_status
     
     if val > word_threshold:
-        print('I heard someone call me!')
+        print('I heard someone say the wake word!')
         if Led_status == 0:
             GPIO.output(LED_PIN, GPIO.HIGH)
-            Led_status == 1
-        else:
-            GPIO.output(LED_PIN, GPIO.Low)
-            Led_status == 0
+            Led_status = 1
+            print('Turn on the Light.')
+        elif Led_status == 1:
+            GPIO.output(LED_PIN, GPIO.LOW)
+            Led_status = 0
+            print('Turn off the Light.')
     print('----------------------------------------------------------------------------')
 
 # Start streaming from microphone
