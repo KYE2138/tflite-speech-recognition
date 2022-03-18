@@ -139,12 +139,15 @@ def sd_callback(rec, frames, time, status):
         if dc == 0:
             dc = 50
             p.ChangeDutyCycle(dc)
+            print('Medium speed')
         elif Led_status == 50:
             dc = 100
             p.ChangeDutyCycle(dc)
+            print('High speed')
         elif Led_status == 100:
             dc = 0
-            p.ChangeDutyCycle(dc)            
+            p.ChangeDutyCycle(dc) 
+            print('Low speed')
     print('----------------------------------------------------------------------------')
 
 # Start streaming from microphone
