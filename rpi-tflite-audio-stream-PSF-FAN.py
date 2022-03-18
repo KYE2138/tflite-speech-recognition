@@ -140,11 +140,11 @@ def sd_callback(rec, frames, time, status):
             dc = 50
             p.ChangeDutyCycle(dc)
             print('Medium speed')
-        elif Led_status == 50:
+        elif dc == 50:
             dc = 100
             p.ChangeDutyCycle(dc)
             print('High speed')
-        elif Led_status == 100:
+        elif dc == 100:
             dc = 0
             p.ChangeDutyCycle(dc) 
             print('Low speed')
