@@ -36,13 +36,13 @@ GPIO.setmode(GPIO.BOARD)
 GPIO.setwarnings(False)
 # Led
 GPIO.setup(LED_PIN, GPIO.OUT)
-GPIO.output(LED_PIN, GPIO.LOW)
+GPIO.output(LED_PIN, GPIO.HIGH)
 Led_status = 0
 # Fan
 GPIO.setup(FAN_PIN, GPIO.OUT)
 p = GPIO.PWM(FAN_PIN, 25000)
-p.start(0)
-dc = 0
+p.start(100)
+dc = 100
 
 # Load model (interpreter)
 interpreter = Interpreter(model_path)
