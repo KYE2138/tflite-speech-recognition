@@ -15,7 +15,6 @@ from tflite_runtime.interpreter import Interpreter
 # Parameters
 debug_time = 1
 debug_acc = 1
-led_pin = 8
 word_threshold = 0.5
 rec_duration = 0.5
 window_stride = 0.5
@@ -23,15 +22,12 @@ sample_rate = 48000
 resample_rate = 8000
 num_channels = 1
 num_mfcc = 16
-model_path = 'SpeechCommandRecognition_model.tflite'
+model_path = 'wake_word_house_lite.tflite'
 
 # Sliding window
 window = np.zeros(int(rec_duration * resample_rate) * 2)
 
 # GPIO 
-#GPIO.setwarnings(False)
-#GPIO.setmode(GPIO.BOARD)
-#GPIO.setup(8, GPIO.OUT, initial=GPIO.LOW)
 
 # GPIO parameters
 LED_PIN = 16
@@ -77,8 +73,6 @@ def decimate(signal, old_fs, new_fs):
 # This gets called every 0.5 seconds
 def sd_callback(rec, frames, time, status):
 
-    GPIO.output(led_pin, GPIO.LOW)
-
     # Start timing for testing
     start = timeit.default_timer()
     
@@ -115,9 +109,11 @@ def sd_callback(rec, frames, time, status):
     interpreter.set_tensor(input_details[0]['index'], in_tensor)
     interpreter.invoke()
     output_data = interpreter.get_tensor(output_details[0]['index'])
-    val = output_data[0]
-
+    val = output_data[0][0]
+    print(output_data[0])
+    print (output_data[0][0])
     
+    '''
     train_commands = ['house','slience']
     if debug_acc:
         print(train_commands)
@@ -129,13 +125,13 @@ def sd_callback(rec, frames, time, status):
     perdict_index = np.argmax(val)
     print ('perdict index:',perdict_index)
     print ('dectect voice:',train_commands[perdict_index])
-    
+    '''
     # global parameters
     global dc
     global LED_PIN
     global Led_status
     
-    if val[0] > word_threshold:
+    if val > word_threshold:
         print('I heard someone call me!')
         if Led_status == 0:
             GPIO.output(LED_PIN, GPIO.HIGH)
